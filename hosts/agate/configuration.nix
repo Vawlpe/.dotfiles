@@ -67,7 +67,6 @@ in
     isNormalUser = true;
     description = "Hazel";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
   };
 
   # Allow unfree packages
@@ -79,15 +78,11 @@ in
     vim
     wget
     kitty
-    gnome.nautilus
-    wofi
     dunst
     neofetch
     slurp
-    helvum
     cliphist
     wl-clipboard
-    easyeffects
     pipewire
     lf
     btop
@@ -101,7 +96,7 @@ in
   programs.tmux.enable = true;
   programs.git.enable = true;
   programs.firefox.enable = true;  
-  programs.waybar.enable = true;
+  #programs.waybar.enable = true;
   programs.light.enable = true;
   
   # WM: Hyprland (wayland)
@@ -132,17 +127,13 @@ in
     enableSSHSupport = true;
   };
   
-  # QT
-  qt.enable = true;
-  qt.platformTheme = "gnome";
-  qt.style = "adwaita-dark";
-
   # List services that you want to enable:
 
   # Services: SSH 
   services.openssh.enable = true;
 
   # Services: Pipewire (pulse, jack, alsa)
+  security.rtkit.enable = true;
   services.pipewire = {
     enable            = true;
     audio.enable      = true;

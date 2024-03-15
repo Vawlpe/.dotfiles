@@ -5,8 +5,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Home Manager
-    # TBA
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
     
+#<-Be-Moved>
     # Niri 
     niri.url = "github:sodiboo/niri-flake";
     niri.inputs.nixpkgs.follows = "nixpkgs";
@@ -18,6 +20,7 @@
     # Spicetify
     spicetify-nix.url = "github:the-argus/spicetify-nix";
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
+#</MOVE-ME>
   };
 
   outputs = {nixpkgs, ...}@inputs: {
@@ -26,6 +29,11 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/agate/configuration.nix
+          inputs.home-manager.nixosModules.home-manager {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.hazel = import ./modules/home-manager/users/hazel/home.nix; 
+          }
         ];
       };
     };
