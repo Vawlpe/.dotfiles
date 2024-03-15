@@ -14,6 +14,10 @@
     # Sddm catppuccin theme
     sddm-catppuccin.url = "github:khaneliman/catppuccin-sddm-corners";
     sddm-catppuccin.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Spicetify
+    spicetify-nix.url = "github:the-argus/spicetify-nix";
+    spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {nixpkgs, ...}@inputs: {

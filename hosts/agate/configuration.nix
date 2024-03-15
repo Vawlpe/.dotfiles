@@ -4,21 +4,22 @@
 
 { config, pkgs, inputs, ... }:
 
+let
+  spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
+in
 {
   imports =
     [
       # Hardware Config
       ./hardware-configuration.nix
 
-      # Niri Flake
+      # Niri module
       inputs.niri.nixosModules.niri
+      
+      # Spicetify module
+      inputs.spicetify-nix.nixosModule
     ];
 
-  # WM: Hyprland (wayland)
-  programs.hyprland.enable = true;
-  
-  # WM: Niri (wayland)
-  programs.niri.enable = true;
 
   # Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -88,12 +89,8 @@
     wl-clipboard
     easyeffects
     pipewire
-    spotify
     lf
     btop
-# WORKAROUND
-#    catppuccin-sddm-corners
-#  ];
     libsForQt5.qt5.qtgraphicaleffects
    ] ++ [
      inputs.sddm-catppuccin.packages.${pkgs.hostPlatform.system}.sddm-catppuccin
@@ -107,6 +104,26 @@
   programs.waybar.enable = true;
   programs.light.enable = true;
   
+  # WM: Hyprland (wayland)
+  programs.hyprland.enable = true;
+  
+  # WM: Niri (wayland)
+  programs.niri.enable = true;
+  
+  # Spicetify
+  programs.spicetify = {
+    enable = true;
+    theme = spicePkgs.themes.catppuccin;
+    colorScheme = "mocha";
+
+    enabledExtensions = with spicePkgs.extensions; [
+      songStats
+      showQueueDuration
+      adblock
+      volumePercentage
+    ];
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

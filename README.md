@@ -1,10 +1,24 @@
-# Vawlpe/dotfiles
-Vawlpe's dotfiles for nixos
+# Vawlpe/.dotfiles
+Vawlpe's dotfiles for nix
 
-    README TBA
+## Project tree
+    ├── README.md
+    ├── LICENSE.md
+    ├── flake.nix
+    ├── flake.lock
+    ├── hosts
+    │    ├── agate
+    │    └── ...
+    ├── modules
+    │    ├── nixos
+    │    │   └── ...
+    │    └── home-manager
+    │        └── ...
+    └── ...
 
-# Copyright Notice
-    Vawlpe's dotfiles for nixos (https://github.com/Vawlpe/dotfiles)
+___
+## Copyright Notice
+    Vawlpe's dotfiles for nixos (https://github.com/Vawlpe/.dotfiles)
     Copyright (C) 2024 Vawlpe (vawlpe@gmail.com)
 
     This git repository contains free software: you can redistribute it and/or modify
