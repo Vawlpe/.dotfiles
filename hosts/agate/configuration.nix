@@ -80,7 +80,6 @@
     kitty
     gnome.nautilus
     wofi
-    grim
     dunst
     neofetch
     slurp
@@ -91,7 +90,14 @@
     pipewire
     spotify
     lf
-  ];
+    btop
+# WORKAROUND
+#    catppuccin-sddm-corners
+#  ];
+    libsForQt5.qt5.qtgraphicaleffects
+   ] ++ [
+     inputs.sddm-catppuccin.packages.${pkgs.hostPlatform.system}.sddm-catppuccin
+   ];
 
   # Misc. Programs
   programs.vim.defaultEditor = true;
@@ -101,8 +107,6 @@
   programs.waybar.enable = true;
   programs.light.enable = true;
   
-  
-  
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -110,13 +114,18 @@
     enable = true;
     enableSSHSupport = true;
   };
+  
+  # QT
+  qt.enable = true;
+  qt.platformTheme = "gnome";
+  qt.style = "adwaita-dark";
 
   # List services that you want to enable:
 
-  # services.xserver.displayManager.sddm.enable = true;
-  # Enable the OpenSSH daemon.
+  # Services: SSH 
   services.openssh.enable = true;
 
+  # Services: Pipewire (pulse, jack, alsa)
   services.pipewire = {
     enable            = true;
     audio.enable      = true;
@@ -124,6 +133,24 @@
     jack.enable       = true;
     alsa.enable       = true;
     alsa.support32Bit = true;
+  };
+  
+  # Services: xserver (sddm)
+  services.xserver = {
+    enable = true;
+    libinput.enable = true;
+
+    # Display Manager
+    displayManager = {
+      defaultSession = "niri";
+
+      # SDDM
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+        theme = "catppuccin";
+      };
+    };
   };
   
   # Open ports in the firewall.
