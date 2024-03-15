@@ -2,13 +2,23 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Hardware Config
       ./hardware-configuration.nix
+
+      # Niri Flake
+      inputs.niri.nixosModules.niri
     ];
+
+  # WM: Hyprland (wayland)
+  programs.hyprland.enable = true;
+  
+  # WM: Niri (wayland)
+  programs.niri.enable = true;
 
   # Flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -83,13 +93,14 @@
     lf
   ];
 
-  # Programs
+  # Misc. Programs
   programs.vim.defaultEditor = true;
-  programs.hyprland.enable = true;
   programs.tmux.enable = true;
   programs.git.enable = true;
   programs.firefox.enable = true;  
   programs.waybar.enable = true;
+  programs.light.enable = true;
+  
   
   
   # Some programs need SUID wrappers, can be configured further or are
