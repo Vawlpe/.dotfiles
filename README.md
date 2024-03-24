@@ -2,24 +2,30 @@
 Vawlpe's dotfiles for nix
 
 ## Project tree
-    ├── README.md
-    ├── LICENSE.md
-    ├── flake.nix
     ├── flake.lock
+    ├── flake.nix
+    ├── LICENSE.md
+    ├── README.md
     ├── hosts
-    │    ├── agate
-    │    └── ...
+    │   ├── hostnames.txt
+    │   ├── shared 
+    │   │   ├── configuration.nix
+    │   │   └── ...
+    │   ├── agate 
+    │   │   ├── configuration.nix
+    │   │   ├── hardware-configuration.nix
+    │   │   └── ... 
+    │   └── ...
     └── modules
-         ├── nixos
-         │   └── ...
-         └── home-manager
-             ├── generic
-             │   └── ...
-             └── users
-                 ├── hazel
-                 │   └── ...
-                 └── ...
-
+        ├── home-manager
+        │   ├── shared
+        │   │   └── ...
+        │   ├── hazel
+        │   │   ├── home.nix
+        │   │   └── ...
+        │   └── ...
+        └── nixos
+            └── ...
 ___
 ## Copyright Notice
     Vawlpe's dotfiles for nixos (https://github.com/Vawlpe/.dotfiles)

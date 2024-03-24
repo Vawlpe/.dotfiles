@@ -240,6 +240,22 @@
         "type": "github"
       }
     },
+    "gitbutler-nixpkgs": {
+      "locked": {
+        "lastModified": 1711230944,
+        "narHash": "sha256-K7kLf2JJ3FH8hog/VSgF7OuAkrkZicpCXtwZ5mWpX/U=",
+        "owner": "hallettj",
+        "repo": "nixpkgs",
+        "rev": "234bdf4fd6b9e5f58713fdb0a04c217f9ebb0923",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hallettj",
+        "repo": "nixpkgs",
+        "rev": "234bdf4fd6b9e5f58713fdb0a04c217f9ebb0923",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -456,6 +472,7 @@
     },
     "root": {
       "inputs": {
+        "gitbutler-nixpkgs": "gitbutler-nixpkgs",
         "home-manager": "home-manager",
         "niri": "niri",
         "nixpkgs": "nixpkgs_3",
