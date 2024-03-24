@@ -2,24 +2,40 @@
 Vawlpe's dotfiles for nix
 
 ## Project tree
-    ├── README.md
-    ├── LICENSE.md
-    ├── flake.nix
-    ├── flake.lock
-    ├── hosts
-    │    ├── agate
-    │    └── ...
-    └── modules
-         ├── nixos
-         │   └── ...
-         └── home-manager
-             ├── generic
-             │   └── ...
-             └── users
-                 ├── hazel
-                 │   └── ...
-                 └── ...
-
+├── flake.lock
+├── flake.nix
+├── LICENSE.md
+├── README.md
+├── hosts
+│   ├── hostnames.txt
+│   ├── agate
+│   │   ├── configuration.nix
+│   │   └── hardware-configuration.nix
+│   └── shared
+│       └── configuration.nix
+├── modules
+│   └── home-manager
+│       ├── hazel
+│       │   └── home.nix
+│       └── shared
+│           ├── cava.nix
+│           ├── browsers
+│           │   ├── default.nix
+│           │   └── firefox.nix
+│           ├── shells
+│           │   ├── default.nix
+│           │   └── zsh.nix
+│           ├── terminals
+│           │   ├── default.nix
+│           │   └── kitty.nix
+│           └── widgets
+│               ├── ags.nix
+│               ├── wofi.nix
+│               └── ags
+│                   ├── config.js
+│                   └── style.css
+└── packages
+    └── catppuccin-wallpapers.nix
 ___
 ## Copyright Notice
     Vawlpe's dotfiles for nixos (https://github.com/Vawlpe/.dotfiles)

@@ -1,6 +1,6 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# /hosts/agate/configuration.nix
+
+# First draft host "Agate"'s main module
 
 { config, pkgs, inputs, ... }:
 
@@ -8,42 +8,23 @@ let
   spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
 in
 {
-  imports =
-    [
-      # Hardware Config
-      ./hardware-configuration.nix
+  imports = [
+    ./hardware-configuration.nix
+    ../shared/configuration.nix
 
-      # Niri module
-      inputs.niri.nixosModules.niri
-      
-      # Spicetify module
-      inputs.spicetify-nix.nixosModule
-    ];
+    # Flake stuff, to be moved
+    inputs.niri.nixosModules.niri
+    inputs.spicetify-nix.nixosModule
+  ];
 
-
-  # Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.hostName = "agate"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
+  # Networking
+  networking.hostName = "agate";
   networking.networkmanager.enable = true;
 
-  # Set your time zone.
+  # Time 
   time.timeZone = "Europe/Bucharest";
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
+  # Locale
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "ro_RO.UTF-8";
     LC_IDENTIFICATION = "ro_RO.UTF-8";
@@ -56,48 +37,34 @@ in
     LC_TIME = "ro_RO.UTF-8";
   };
 
-  # Configure keymap in X11
-  # services.xserver = {
-  #  layout = "us";
-  #  xkbVariant = "";
-  # };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Users 
   users.users.hazel = {
     isNormalUser = true;
     description = "Hazel";
     extraGroups = [ "networkmanager" "wheel" ];
   };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  
+  # Packages
   environment.systemPackages = with pkgs; [
-    vim
-    wget
-    kitty
-    dunst
-    neofetch
+    # kitty
+    #dunst
     slurp
     cliphist
     wl-clipboard
     pipewire
-    lf
-    btop
     libsForQt5.qt5.qtgraphicaleffects
+    cage
+    ntfs3g
+    swww
    ] ++ [
+   # Pain & Suffering
      inputs.sddm-catppuccin.packages.${pkgs.hostPlatform.system}.sddm-catppuccin
+     inputs.gitbutler-nixpkgs.legacyPackages.${pkgs.hostPlatform.system}.gitbutler
    ];
 
   # Misc. Programs
-  programs.vim.defaultEditor = true;
-  programs.tmux.enable = true;
-  programs.git.enable = true;
   programs.firefox.enable = true;  
-  #programs.waybar.enable = true;
-  programs.light.enable = true;
+  programs.steam.enable   = true;
   
   # WM: Hyprland (wayland)
   programs.hyprland.enable = true;
@@ -119,35 +86,13 @@ in
     ];
   };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
   # programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
-  
-  # List services that you want to enable:
 
-  # Services: SSH 
-  services.openssh.enable = true;
-
-  # Services: Pipewire (pulse, jack, alsa)
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable            = true;
-    audio.enable      = true;
-    pulse.enable      = true;
-    jack.enable       = true;
-    alsa.enable       = true;
-    alsa.support32Bit = true;
-  };
-  
   # Services: xserver (sddm)
   services.xserver = {
     enable = true;
     libinput.enable = true;
-
+    
     # Display Manager
     displayManager = {
       defaultSession = "niri";
@@ -174,5 +119,4 @@ in
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-
 }

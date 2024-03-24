@@ -1,5 +1,5 @@
 {
-  description = "Vawlpe's system flake";
+  description = "Vawlpe's multi-system/multi-user flake";
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -8,7 +8,10 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     
-#<-Be-Moved>
+#<MOVE-ME>
+    # GitButler
+    gitbutler-nixpkgs.url = "github:hallettj/nixpkgs/234bdf4fd6b9e5f58713fdb0a04c217f9ebb0923";
+    
     # Niri 
     niri.url = "github:sodiboo/niri-flake";
     niri.inputs.nixpkgs.follows = "nixpkgs";
@@ -20,10 +23,16 @@
     # Spicetify
     spicetify-nix.url = "github:the-argus/spicetify-nix";
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # AGS
+    ags.url = "github:Aylur/ags";
+    ags.inputs.nixpkgs.follows = "nixpkgs";
 #</MOVE-ME>
   };
 
-  outputs = {nixpkgs, ...}@inputs: {
+  outputs = {self, nixpkgs, ... }@inputs: {
+    inputs.gitbutler-nixpkgs.config.allowUnfree = true;
+    # Hosts
     nixosConfigurations = {
       agate = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
@@ -32,7 +41,8 @@
           inputs.home-manager.nixosModules.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.hazel = import ./modules/home-manager/users/hazel/home.nix; 
+              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.users.hazel = import ./modules/home-manager/hazel/home.nix;
           }
         ];
       };

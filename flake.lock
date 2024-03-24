@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "ags": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1710947530,
+        "narHash": "sha256-tbUlS7ixL0JCNY7f9ilMwemVMabbveCXb3aIdWWE1Zs=",
+        "owner": "Aylur",
+        "repo": "ags",
+        "rev": "915c3dfcd403e5d3155a410bcda5b93e15a44161",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Aylur",
+        "repo": "ags",
+        "type": "github"
+      }
+    },
     "cachix": {
       "inputs": {
         "devenv": [
@@ -240,6 +260,22 @@
         "type": "github"
       }
     },
+    "gitbutler-nixpkgs": {
+      "locked": {
+        "lastModified": 1711230944,
+        "narHash": "sha256-K7kLf2JJ3FH8hog/VSgF7OuAkrkZicpCXtwZ5mWpX/U=",
+        "owner": "hallettj",
+        "repo": "nixpkgs",
+        "rev": "234bdf4fd6b9e5f58713fdb0a04c217f9ebb0923",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hallettj",
+        "repo": "nixpkgs",
+        "rev": "234bdf4fd6b9e5f58713fdb0a04c217f9ebb0923",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -456,6 +492,8 @@
     },
     "root": {
       "inputs": {
+        "ags": "ags",
+        "gitbutler-nixpkgs": "gitbutler-nixpkgs",
         "home-manager": "home-manager",
         "niri": "niri",
         "nixpkgs": "nixpkgs_3",
