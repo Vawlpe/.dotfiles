@@ -1,5 +1,6 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 {
+  # Home
   home.username = "hazel";
   home.homeDirectory = "/home/hazel";
   home.stateVersion = "23.11";
@@ -11,9 +12,6 @@
     size = 24;
   };
 
-  # Programs
-  # ...
-
   # Packages
   home.packages = with pkgs; [
     vlc
@@ -22,6 +20,10 @@
     wofi
     pwvucontrol
     easyeffects
+    obsidian
+    deluge-gtk
+    prismlauncher
+    godot_4
   ];
 
   # Gtk
