@@ -1,13 +1,16 @@
-{ inputs, config, pkgs, ... }: let
+{ inputs, config, pkgs, ... }: 
+let
   catppuccin-wallpapers = import ../../../packages/catppuccin-wallpapers.nix { inherit pkgs; };
-in {
+in
+{
   imports = [
     ../shared/terminals/default.nix
     ../shared/shells/default.nix
     ../shared/browsers/default.nix
-    ../shared/widgets/ags.nix
-    ../shared/widgets/wofi.nix
+    #../shared/widgets/wofi.nix
+    #../shared/widgets/ags.nix
     ../shared/cava.nix
+    ../shared/pro-audio.nix
   ];
   
   # Home
@@ -27,28 +30,25 @@ in {
   home.packages = with pkgs; [
     vlc
     helvum
-    pwvucontrol
     easyeffects
-    gnome.nautilus
     obsidian
     deluge-gtk
     prismlauncher
     godot_4
-    grim
     pipes
-    waypaper
     kdePackages.kdenlive
+    vesktop
   ] ++ [
     catppuccin-wallpapers
   ];
 
   # Misc. Dotfiles
   home.file = {
-    ".config/waypaper/config.ini".text = ''
-      [Settings]
-      folder = ${catppuccin-wallpapers}
-      subfolders = True
-    '';
+   # ".config/waypaper/config.ini".text = ''
+   #   [Settings]
+   #   folder = ${catppuccin-wallpapers}
+   #   subfolders = True
+   # '';
   };
   
   # Programs

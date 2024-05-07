@@ -23,6 +23,7 @@
       window {
         font-family: "FiraCode Nerd Font Regular";
         font-size: 11px;
+        padding: 8px;
         margin: 0px;
         border: 5px solid #94e2d5;
         background-color: #1e1e2e;
