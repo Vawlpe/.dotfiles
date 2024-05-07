@@ -1,3 +1,5 @@
+import { NiriMap } from "./nirimap.js"
+
 const hyprland = await Service.import("hyprland")
 const notifications = await Service.import("notifications")
 const mpris = await Service.import("mpris")
@@ -161,8 +163,8 @@ function Left() {
     return Widget.Box({
         spacing: 8,
         children: [
-            Workspaces(),
-            ClientTitle(),
+           Workspaces(),
+           ClientTitle(),
         ],
     })
 }
@@ -209,10 +211,7 @@ App.config({
     style: "./style.css",
     windows: [
         Bar(),
-
-        // you can call it, for each monitor
-        // Bar(0),
-        // Bar(1)
+	NiriMap(),
     ],
 })
 
