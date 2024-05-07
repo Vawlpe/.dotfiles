@@ -3,10 +3,6 @@
 # First draft host "Agate"'s main module
 
 { config, pkgs, inputs, ... }:
-
-let
-  spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
-in
 {
   imports = [
     ./hardware-configuration.nix
@@ -14,7 +10,10 @@ in
 
     # Flake stuff, to be moved
     inputs.niri.nixosModules.niri
-    inputs.spicetify-nix.nixosModule
+
+    # Modules
+    ../../modules/nixos/shared/gitbutler.nix
+    ../../modules/nixos/shared/spicetify.nix
   ];
 
   # Networking
@@ -56,10 +55,10 @@ in
     cage
     ntfs3g
     swww
+    protonmail-desktop
    ] ++ [
    # Pain & Suffering
      inputs.sddm-catppuccin.packages.${pkgs.hostPlatform.system}.sddm-catppuccin
-     inputs.gitbutler-nixpkgs.legacyPackages.${pkgs.hostPlatform.system}.gitbutler
    ];
 
   # Misc. Programs
@@ -71,20 +70,6 @@ in
   
   # WM: Niri (wayland)
   programs.niri.enable = true;
-  
-  # Spicetify
-  programs.spicetify = {
-    enable = true;
-    theme = spicePkgs.themes.catppuccin;
-    colorScheme = "mocha";
-
-    enabledExtensions = with spicePkgs.extensions; [
-      songStats
-      showQueueDuration
-      adblock
-      volumePercentage
-    ];
-  };
 
   # programs.mtr.enable = true;
 

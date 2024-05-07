@@ -27,6 +27,10 @@
     # AGS
     ags.url = "github:Aylur/ags";
     ags.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Pro Audio (musnix)
+    musnix.url = "github:musnix/musnix";
+    musnix.inputs.nixpkgs.follows = "nixpkgs";
 #</MOVE-ME>
   };
 

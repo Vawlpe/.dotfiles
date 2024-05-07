@@ -40,6 +40,7 @@
   };
 
   # Default services
+  # sound.enable            = true;
   security.rtkit.enable   = true;
   services.openssh.enable = true;
   services.pipewire = {
